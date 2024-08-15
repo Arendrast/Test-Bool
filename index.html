@@ -41,8 +41,7 @@ function sendUserIdToUnity() {
                 let userId = tg.initDataUnsafe.user.id;
                 let userIdStr = userId.toString();
                 let userUsernameStr = tg.initDataUnsafe.user.username;// Пример с ником
-                gameInstance.SendMessage('IDReceiver', 'ReceiveUserId', userIdStr);
-                gameInstance.SendMessage('IDReceiver', 'ReceiveUserUsername', userUsernameStr);
+                gameInstance.SendMessage('GetUserId', userIdStr);
             });
         }
 
