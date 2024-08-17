@@ -8,7 +8,7 @@
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #231F20"></canvas>
-    <script src="Build/Test.loader.js"></script>
+    <script src="Build/Build.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -41,15 +41,14 @@ function sendUserIdToUnity() {
                 let userId = tg.initDataUnsafe.user.id;
                 let userIdStr = userId.toString();
                 let userUsernameStr = tg.initDataUnsafe.user.username;// Пример с ником
-                gameInstance.SendMessage('IDReceiver', 'ReceiveUserId', userIdStr);
-                gameInstance.SendMessage('IDReceiver', 'ReceiveUserUsername', userUsernameStr);
+                gameInstance.SendMessage('TelegramObserver', 'GetUserID', userIdStr);
             });
         }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Test.data",
-        frameworkUrl: "Build/Test.framework.js",
-        codeUrl: "Build/Test.wasm",
+        dataUrl: "Build/Build.data",
+        frameworkUrl: "Build/Build.framework.js",
+        codeUrl: "Build/Build.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "PaintIn3D",
