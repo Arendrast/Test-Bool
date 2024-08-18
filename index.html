@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | TowerDefense</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #CCCCCC"></canvas>
@@ -24,6 +25,26 @@
         document.body.style.textAlign = "left";
       }
 
+function sendUserIdToUnity() {
+            function checkTelegramWebAppReady() {
+                return new Promise((resolve) => {
+                    const interval = setInterval(() => {
+                        if (window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+                            clearInterval(interval);
+                            resolve(window.Telegram.WebApp);
+                        }
+                    }, 100);
+                });
+            }
+
+            checkTelegramWebAppReady().then((tg) => {
+                let userId = tg.initDataUnsafe.user.id;
+                let userIdStr = userId.toString();
+                let userUsernameStr = tg.initDataUnsafe.user.username;// Пример с ником
+                gameInstance.SendMessage('TelegramObserver', 'GetUserID', userIdStr);
+            });
+        }
+
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/Build2.data",
         frameworkUrl: "Build/Build2.framework.js",
@@ -34,7 +55,9 @@
         productVersion: "0.1",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+      }).then((unityInstance) => {
+        window.gameInstance = unityInstance; // Сохраняем экземпляр Unity
+        sendUserIdToUnity(); // Отправляем ID пользователя после загрузки Unity;
     </script>
   </body>
 </html>
