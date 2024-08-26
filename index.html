@@ -74,7 +74,7 @@ function sendUserIdToUnity() {
                     }, 100);
                 });
             }
-
+//
             checkTelegramWebAppReady().then((tg) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
