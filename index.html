@@ -84,6 +84,7 @@ function sendUserIdToUnity() {
 		gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
 		gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
 		gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
+		tg.expand();
             });
         }
 
@@ -100,7 +101,6 @@ function sendUserIdToUnity() {
       }).then((unityInstance) => {
         window.gameInstance = unityInstance; // Сохраняем экземпляр Unity
         sendUserIdToUnity(); // Отправляем ID пользователя после загрузки Unity
-	tg.expand();
       });
     </script>
   </body>
