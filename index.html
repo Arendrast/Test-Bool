@@ -84,6 +84,7 @@ function sendUserIdToUnity() {
 		gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
 		gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
 		gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
+		tg.Expand();
             });
         }
 
