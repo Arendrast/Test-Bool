@@ -84,8 +84,8 @@ const waitForVariableToBeNotNull = (variable) => {
 try {
 
   setTimeout(() => {
-    tg.initDataUnsafe.user.photo_url = "Значение";
-}, "test");
+    tg.initDataUnsafe.user.photo_url = "test";
+}, 2000);
   
 waitForVariableToBeNotNull(tg.initDataUnsafe.user.photo_url).then(value => {
                 if (userAvatarURL == null)
