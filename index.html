@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Unity WebGL Player | TowerDefense</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-<style>
+    <style>
         html, body {
             height: 100%;
             margin: 0;
@@ -45,25 +46,15 @@
             background: #F0C636;
         }
     </style>
-    <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1" style="width: 960px; height: 600px; background: #231F20"></canvas>
+    <canvas id="unity-canvas" tabindex="-1" style="background: #231F20;"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+      var canvas = document.querySelector("#unity-canvas");
+      canvas.style.width = "100vw";
+      canvas.style.height = "100vh";
+      canvas.style.position = "fixed";
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
-
-        document.body.style.textAlign = "left";
-      }
-
-function sendUserIdToUnity() {
+      function sendUserIdToUnity() {
             function checkTelegramWebAppReady() {
                 return new Promise((resolve) => {
                     const interval = setInterval(() => {
@@ -74,17 +65,17 @@ function sendUserIdToUnity() {
                     }, 100);
                 });
             }
-//
+
             checkTelegramWebAppReady().then((tg) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
-		let userAvatarURL = tg.initDataUnsafe.user.photo_url;
-		let userRefferalPlayerID = tg.initData.start_param;
-                gameInstance.SendMessage('TelegramObserver', 'GetUserID', userIdStr);
-		gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
-		gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
-		gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
-		tg.expand();
+                let userAvatarURL = tg.initDataUnsafe.user.photo_url;
+                let userRefferalPlayerID = tg.initData.start_param;
+                gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
+                gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
+                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
+                gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
+                tg.expand();
             });
         }
 
