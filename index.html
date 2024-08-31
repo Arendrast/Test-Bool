@@ -72,11 +72,11 @@
                 let userRefferalPlayerID = tg.initData.start_param;
 try {
                 let userAvatarURL = tg.initDataUnsafe.user.photo_url;
-                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
+                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "456");
 
 } catch (err) {
 
-                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "{err}");
+                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "123");
 }
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
