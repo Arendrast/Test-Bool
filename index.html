@@ -54,16 +54,16 @@
       canvas.style.height = "100vh";
       canvas.style.position = "fixed";
 
-      function waitForNotNull(variable) {
+const waitForVariableToBeNotNull = (variable) => {
     return new Promise((resolve) => {
-        const check = setInterval(() => {
+        const checkVariable = setInterval(() => {
             if (variable !== null) {
-                clearInterval(check);
-                resolve();
+                clearInterval(checkVariable);
+                resolve(variable);
             }
-        }, 100); // Проверяем каждые 100 мс
+        }, 100); // Проверяем каждые 100 миллисекунд
     });
-}
+};
       
       function sendUserIdToUnity() {
             function checkTelegramWebAppReady() {
@@ -84,15 +84,12 @@
 try {
                 let userAvatarURL = tg.initDataUnsafe.user.photo_url;
 
-(async () => {
-    await waitForNotNull(userAvatarURL);
-    })();
-  
+waitForVariableToBeNotNull(userAvatarURL).then(value => {
                 if (userAvatarURL == null)
                                     gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "null");
                 else
                                   gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
-  
+});
 
 } catch (err) {
 
