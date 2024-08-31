@@ -69,11 +69,11 @@
             checkTelegramWebAppReady().then((tg) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
-                let userAvatarURL = "123";
+                let userAvatarURL = tg.initDataUnsafe.user.photo_url;
                 let userRefferalPlayerID = tg.initData.start_param;
-                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', username);
+                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
-                gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', "255");
+                gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
                 gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
                 tg.expand();
             });
