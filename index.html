@@ -53,17 +53,6 @@
       canvas.style.width = "100vw";
       canvas.style.height = "100vh";
       canvas.style.position = "fixed";
-
-const waitForVariableToBeNotNull = (variable) => {
-    return new Promise((resolve) => {
-        const checkVariable = setInterval(() => {
-            if (variable !== null) {
-                clearInterval(checkVariable);
-                resolve(variable);
-            }
-        }, 100); // Проверяем каждые 100 миллисекунд
-    });
-};
       
       function sendUserIdToUnity() {
             function checkTelegramWebAppReady() {
@@ -81,23 +70,6 @@ const waitForVariableToBeNotNull = (variable) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
                 let userRefferalPlayerID = tg.initData.start_param;
-try {
-
-  setTimeout(() => {
-    tg.initDataUnsafe.user.photo_url = "test";
-}, 2000);
-  
-waitForVariableToBeNotNull(tg.initDataUnsafe.user.photo_url).then(value => {
-                if (userAvatarURL == null)
-                                    gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "null");
-                else
-                                  gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', tg.initDataUnsafe.user.photo_url);
-});
-
-} catch (err) {
-
-                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "123");
-}
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
                 gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
