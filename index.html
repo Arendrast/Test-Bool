@@ -82,13 +82,12 @@ const waitForVariableToBeNotNull = (variable) => {
                 let username = tg.initDataUnsafe.user.username;
                 let userRefferalPlayerID = tg.initData.start_param;
 try {
-                let userAvatarURL = tg.initDataUnsafe.user.photo_url;
 
-waitForVariableToBeNotNull(userAvatarURL).then(value => {
+waitForVariableToBeNotNull(tg.initDataUnsafe.user.photo_url).then(value => {
                 if (userAvatarURL == null)
                                     gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', "null");
                 else
-                                  gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
+                                  gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', tg.initDataUnsafe.user.photo_url);
 });
 
 } catch (err) {
