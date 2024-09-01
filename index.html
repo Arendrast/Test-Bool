@@ -69,7 +69,7 @@
             checkTelegramWebAppReady().then((tg) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
-                let userRefferalPlayerID = tg.initData.start_param;
+                let userRefferalPlayerID = tg.initDataUnsafe.start_param;
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
               if (userRefferalPlayerID == null)
