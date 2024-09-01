@@ -53,7 +53,7 @@
       canvas.style.width = "100vw";
       canvas.style.height = "100vh";
       canvas.style.position = "fixed";
-
+      
       function sendUserIdToUnity() {
             function checkTelegramWebAppReady() {
                 return new Promise((resolve) => {
@@ -69,11 +69,12 @@
             checkTelegramWebAppReady().then((tg) => {
                 let userId = tg.initDataUnsafe.user.id.toString();
                 let username = tg.initDataUnsafe.user.username;
-                let userAvatarURL = tg.initDataUnsafe.user.photo_url;
-                let userRefferalPlayerID = tg.initData.start_param;
+                let userRefferalPlayerID = tg.initDataUnsafe.start_param;
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
-                gameInstance.SendMessage('TelegramObserver', 'GetAvatarURL', userAvatarURL);
+              if (userRefferalPlayerID == null)
+                                gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', "null");
+else
                 gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
                 tg.expand();
             });
