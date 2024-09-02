@@ -72,7 +72,10 @@
                 let userRefferalPlayerID = tg.initDataUnsafe.start_param;
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
                 gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
-                gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID ?? "null");
+                if (userRefferalPlayerID == null)
+                    gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', "null");
+              else
+                    gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID);
                 tg.expand();
             });
         }
