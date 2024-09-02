@@ -71,8 +71,9 @@
                 let username = tg.initDataUnsafe.user.username;
                 let userRefferalPlayerID = tg.initDataUnsafe.start_param;
                 gameInstance.SendMessage('TelegramObserver', 'GetUserID', userId);
-                gameInstance.SendMessage('TelegramObserver', 'GetUserNickname', username);
+                gameInstance.SendMessage('TelegramObserver', 'GetNickname', username);
                 gameInstance.SendMessage('TelegramObserver', 'GetRefferalPlayerID', userRefferalPlayerID ?? "null");
+
                 tg.expand();
             });
         }
