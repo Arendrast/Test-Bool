@@ -53,13 +53,6 @@
       canvas.style.width = "100vw";
       canvas.style.height = "100vh";
       canvas.style.position = "fixed";
-
-mergeInto(LibraryManager.library, {
-
-  CreateInvoiceLink: function () {
-    window.Telegram.WebApp.createInvoiceLink("test1", "test2", "test3", "", "XTR", [{label:"Price label", amount: 1}]);
-  },
-});
       
       function sendUserIdToUnity() {
             function checkTelegramWebAppReady() {
